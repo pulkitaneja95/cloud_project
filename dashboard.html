@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Complaint Logger - a maintainance system</title>
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+</head>
+
+<body>
+
+		<section id="body" class="width">
+			<aside id="sidebar" class="column-left">
+
+			<header>
+				<h1><a href="#">Complaint Logger</a></h1>
+
+				<h2>user account</h2>
+				
+			</header>
+
+			<nav id="mainnav">
+  				<ul>
+                            		<li class="selected-item"><a href="dashboard.html">Dashboard</a></li>
+                           		 <li><a href="assigned.html">Assigned Tickets</a></li>
+                           		 <li><a href="completed.html">Completed Tickets</a></li>
+                            		
+                            		<!-- <li><a href="#">Logout</a></li> -->
+                        	</ul>
+			</nav>
+
+			
+			
+			</aside>
+			<section id="content" class="column-right">
+                		
+	    <article>
+				
+			<br>
+			<br>
+			<h2>Search for open complaints</h2>
+			<br>
+			<br>
+			
+
+		<input type="text" name="search_tag" placeholder="key word">
+		<br>
+		<div id="result">
+		</div>
+		<script type="text/javascript">
+			function loadDoc() {
+				
+			  var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+
+			      	var dataset = this.responseText;
+			      	//alert(dataset);
+			      	var complaint_data = JSON.parse(dataset)
+			      	var str="";
+			      	var img="";
+			      	complaint_data.forEach(function(data) {
+			      		if (typeof data['assigned'] !== 'undefined' && data['assigned'].length > 2) {	
+
+			     		} else {
+			      			img=data['img_src'];
+			      			// img = img.substr(41);
+			      			// alert(img);		
+					  		str+="<div class='comaplaints_row' style='background-color: #D3D3D3'><a href='ticket_expanded.html?img_src="+img+"'><img src = '"+data['img_src']+"' height='100px'; width='100px; float='left'></a><div class='inner_data' style='float: right'><b>Category:</b>"+data['category']+"<br><button class='button' value='"+data['phone_no']+"' onclick='assignComplaint(this.value)'>Assign</button> </div><b>Location:</b> "+data['Location']+"</div><br>"
+					  			
+					  			}
+							}
+					);
+			      		
+			      	document.getElementById("result").innerHTML = str;
+			    
+			    }
+			  };
+			  xhttp.open("GET", "https://lx5ke989qg.execute-api.us-east-1.amazonaws.com/firststage/get-all-records", true);
+  			xhttp.send();
+  		}
+  		loadDoc();
+		</script>
+		
+		<script>
+			function assignComplaint(phone_no) {
+				{
+				var req={
+					'phone':phone_no
+				}
+			  var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+
+			    	alert(this.responseText);
+			    	loadDoc();
+
+			  //     	var dataset = this.responseText;
+			  //     	//alert(dataset);
+			  //     	var complaint_data = JSON.parse(dataset)
+			  //     	var str="";
+			  //     	complaint_data.forEach(function(data) {
+					//   	str+="<div class='comaplaints_row' style='background-color: #D3D3D3'><img src = '"+data['img_src']+"' height='100px'; width='100px; float='left'><div class='inner_data' style='float: right'><b>Category:</b>"+data['category']+"<br><button class='button' value='"+data['phone_no']+"' onclick='assignComplaint(this.value)'>Assign</button> </div><b>Location:</b> "+data['Location']+"</div><br>"
+
+					// });
+			      		
+			  //     	document.getElementById("result").innerHTML = str;
+			    
+			    }
+			  };
+			  xhttp.open("POST", "https://lx5ke989qg.execute-api.us-east-1.amazonaws.com/firststage/assign-complaint-to-user", true);
+  			xhttp.send(JSON.stringify(req));
+  		}
+
+			}
+		</script>
+
+
+		<br>
+		<input type="button" class="button" value="Search">
+
+
+	
+
+			
+			<footer class="clear">
+				<p>&copy; 2018 complaint logger. <a href="#">Cloud Project</a> by is1582 pa1304 ss11341 rkc293</p>
+			</footer>
+
+		</section>
+
+		<div class="clear"></div>
+
+	</section>
+	
+
+</body>
+</html>

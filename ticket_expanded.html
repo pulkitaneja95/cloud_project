@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Complaint Logger - a maintainance system</title>
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+</head>
+
+<body>
+
+		<section id="body" class="width">
+			<aside id="sidebar" class="column-left">
+
+			<header>
+				<h1><a href="#">Complaint Logger</a></h1>
+
+				<h2>user account</h2>
+				
+			</header>
+
+			<nav id="mainnav">
+  				<ul>
+                            		<li class="selected-item"><a href="dashboard.html">Dashboard</a></li>
+                           		 <li><a href="assigned.html">Assigned Tickets</a></li>
+                           		 <li><a href="completed.html">Completed Tickets</a></li>
+                            		
+                            		<!-- <li><a href="#">Logout</a></li> -->
+                        	</ul>
+			</nav>
+
+			
+			
+			</aside>
+			<section id="content" class="column-right">
+                		
+	    <article>
+				
+			<br>
+			<br>
+			<h2>Complaints</h2>
+			<br>
+			<br>
+			
+
+		<input type="text" name="search_tag" placeholder="key word">
+		<br>
+		<br>
+		<input type="button" class="button" value="Search">
+
+		<div id="ticket_list"></div>
+
+			<div id = "user_message"> </div>
+			<div id='mydiv'></div>
+			<script type="text/javascript">
+				    var myParam = location.search.split('img_src=')[1]
+				    document.getElementById('mydiv').innerHTML = '<img src='+myParam+'>';
+			</script>
+			
+			
+
+			
+			<footer class="clear">
+				<p>&copy; 2018 complaint logger. <a href="http://zypopwebtemplates.com/">Cloud Project</a> by is1582 pa1304 ss11341 rkc293</p>
+			</footer>
+
+		</section>
+
+		<div class="clear"></div>
+
+	</section>
+	
+
+</body>
+</html>
